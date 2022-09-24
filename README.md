@@ -14,12 +14,15 @@
     -listings: total n° of listings;
     -months_inventory: time amount necessary to sell all the active listings at the actual rythm [months]
     
-  
   The projects consists in the developments of the following points:
   
+  
   *-Desciption of the different variable types of the dataset;*
+  
   *-Analysis of indices of position (mean, median, quantiles, etc.), variability (dispersion index, coefficient of dispersion, relative variance, standard deviation,         Gini index, etc.) and distribution form (Fisher asymmetry index, Kurtosis index);*
+  
   *-Definition of an "Effectiveness" variable to look at which city/which year has been the most effective in terms of sales;*
+  
   *-Use of moments, dplyr, ggplot, gghalves packages to show significative diagrams, boxplots, line charts and plots.*
   
 ## 2-Inferential Statistics fornData Scientists
