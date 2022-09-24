@@ -1,0 +1,610 @@
+##########PUNTO 1: Scarica il dataset realestate_textas.csv e importalo con R, 
+##########questo contiene dei dati riguardanti le vendite di immobili in Texas
+
+dati=read.csv("realestate_texas.csv",sep=",")
+#------------------------------------------------------------------------------------------------------------
+
+##########PUNTO 3:Calcola Indici di posizione, variabilità e forma per tutte le variabili per le quali ha senso farlo, 
+##########per le altre crea una distribuzione di frequenza. Commenta tutto brevemente.
+
+#funzione "attach" per poter richiamare le variabili senza scrivere dati$nome_variabile
+#creo variabile n per la lunghezza del dataset
+attach(dati)
+n=dim(dati)[1]
+
+#1-CITY (è una variabile qualitativa, quindi calcoliamo distribuzione di frequenza)
+ni=table(city)
+fi=ni/n
+Ni=cumsum(ni)
+Fi=Ni/n
+cbind(ni,fi,Ni,Fi)
+
+#____________________
+#INDICI DI POSIZIONE | --> MINIMO, MASSIMO, MEDIA, MEDIANA, QUARTILI
+#____________________
+
+#2-YEAR
+#trovo che non dia valore aggiunto valutare alcuni degli indici per le variabili year e month
+#poichè il dataset riporta per ogni città lo stesso intervallo di mesi e anni 
+#trovo che abbia senso usarle per la costruzione di una serie storica oppure per valutare 
+#la variazione di frequenza delle altre variabili nel tempo, magari anche in funzione della città
+#introduco ad ogni modo le formule per la variabile year per poi riutilizzarle per le altre variabili
+
+
+#minimo (due metodi)
+sort(year)[1]
+min(year)
+#massimo (due metodi)
+sort(year)[n]
+max(year)
+#media (due metodi)
+sum(year)/n
+mean(year)
+#mediana (due metodi)
+sum(sort(year)[c(n/2,n/2+1)])/2
+median(year)
+#quartili 
+sort(year)[n/4]
+sort(year)[3*n/4]
+quantile(year)
+#con summary() posso individuare allo stesso modo min, max, quartili, media, mediana in un colpo solo
+summary(year)
+#distribuzione di frequenza
+ni=table(year)
+fi=ni/n
+Ni=cumsum(ni)
+Fi=Ni/n
+cbind(ni,fi,Ni,Fi)
+
+#3-MONTH
+min(month)
+max(month)
+mean(month)
+median(month)
+quantile(month)
+summary(month)
+#distribuzione di frequenza
+ni=table(month)
+fi=ni/n
+Ni=cumsum(ni)
+Fi=Ni/n
+cbind(ni,fi,Ni,Fi)
+#provato a suddividere in trimestri per avere dati meno dispersi rispetto alle 12 modalità iniziali
+dati$quarter=cut(month, breaks=c(0,3,6,9,12))
+attach(dati)
+ni=table(quarter)
+fi=ni/n
+Ni=cumsum(ni)
+Fi=Ni/n
+cbind(ni,fi,Ni,Fi)
+
+#4-SALES
+min(sales)
+max(sales)
+mean(sales)
+median(sales)
+quantile(sales)
+summary(sales)
+
+#5-VOLUME
+min(volume)
+max(volume)
+mean(volume)
+median(volume)
+quantile(volume)
+summary(volume)
+
+#6-MEDIAN PRICE
+min(median_price)
+max(median_price)
+mean(median_price)
+median(median_price)
+quantile(median_price)
+summary(median_price)
+
+#7-LISTINGS 
+min(listings)
+max(listings)
+mean(listings)
+median(listings)
+quantile(listings)
+summary(listings)
+
+#8-MONTHS INVENTORY 
+min(months_inventory)
+max(months_inventory)
+mean(months_inventory)
+median(months_inventory)
+quantile(months_inventory)
+summary(months_inventory)
+
+
+
+#________________________
+#INDICI DI VARIABILITA' | --> RANGE, IQR, VARIANZA; DEVIAZIONE STANDARD, COEFFICIENTE DI VARIABILITA', INDICE DI GINI
+#________________________
+
+#creo funzione per coeff variabilità
+cv=function(x){
+  sd(x)/mean(x)*100
+}
+#creo funzione per indice di eterogeneità di Gini
+gini.index=function(x){
+  ni=table(x)
+  fi=ni/length(x)
+  fi2=fi^2
+  J=length(table(x))
+  gini=1-sum(fi2)
+  gini.norm=gini*J/(J-1)
+  return(gini.norm)
+}
+#creo funzione per range
+range=function(x){
+  return(max(x)-min(x))
+}
+
+#2-YEAR
+range(year)
+IQR(year)
+#varianza e deviazione standard (due metodi)
+mu=mean(year)
+sigma2=sum((year-mu)^2)/n
+sigma=sqrt(sigma2)
+var(year)
+sd(year)
+cv(year)
+gini.index(year)
+
+#3-MONTH
+range(month)
+IQR(month)
+var(month)
+sd(month)
+cv(month)
+gini.index(month)
+
+#4-SALES
+range(sales)
+IQR(sales)
+var(sales)
+sd(sales)
+cv(sales)
+gini.index(sales)
+
+#5-VOLUME
+range(volume)
+IQR(volume)
+var(volume)
+sd(volume)
+cv(volume)
+gini.index(volume)
+
+#6-MEDIAN PRICE
+range(median_price)
+IQR(median_price)
+var(median_price)
+sd(median_price)
+cv(median_price)
+gini.index(median_price)
+
+#7-LISTINGS
+range(listings)
+IQR(listings)
+var(listings)
+sd(listings)
+cv(listings)
+gini.index(listings)
+
+#8-MONTHS INVENTORY
+range(months_inventory)
+IQR(months_inventory)
+var(months_inventory)
+sd(months_inventory)
+cv(months_inventory)
+gini.index(months_inventory)
+
+#________________
+#INDICI DI FORMA| --> ASIMMETRIA DI FISHER, CURTOSI
+#________________
+
+
+#installo pacchetto per funzioni di asimmetria e curtosi
+install.packages("moments")
+library(moments)
+
+#2-YEAR
+
+#asimmetria (due metodi)
+m3=sum((year-mean(year))^3)/n
+m3/sd(year)^3
+skewness(year)
+#curtosi (2 metodi)
+m4=sum((year-mean(year))^4)/n
+m4/sd(year)^4-3
+kurtosis(year)-3
+
+#3-MONTHS
+skewness(month)
+kurtosis(month)-3
+
+#4-SALES
+skewness(sales)
+kurtosis(sales)-3
+
+#5-VOLUME
+skewness(volume)
+kurtosis(volume)-3
+
+#6-MEDIAN PRICE
+skewness(median_price)
+kurtosis(median_price)-3
+
+#7-LISTINGS
+skewness(listings)
+kurtosis(listings)-3
+
+#MONTHS INVENTORY
+skewness(months_inventory)
+kurtosis(months_inventory)-3
+
+#------------------------------------------------------------------------------------------------------------
+
+#########PUNTO 4:	4)	Qual è la variabile con variabilità più elevata? Come ci sei arrivato? E quale quella più asimmetrica?
+
+#dai risultati del punto precedente la variabile con variabilità maggiore risulta essere volume, 
+#mentre quella con variabile minore è median_price
+#la variabile asimmetrica è sempre volume mentre quella più simmetrica è month inventory
+
+#plotto volume per verificare che abbia asimmetria positiva quindi siano maggiori le frequenze dei valori bassi
+#verifico poi che media>median>moda
+install.packages("ggplot2")
+library(ggplot2)
+ggplot()+
+  geom_density(aes(x=volume),col="black",
+               fill="lightblue")+
+  labs(title="Densità di probabilità variabile volume",
+       x="Prezzo totale in mln$",
+       y="Frequenza relativa")+
+  geom_vline(xintercept = mean(volume),col="red",lwd=1)+
+  geom_vline(xintercept = median(volume),col="blue",lwd=1)+
+  geom_label(aes(y=0.002,x=mean(volume)+8),
+            label="mean", col="red")+
+  geom_label(aes(y=0.002,x=mean(volume)-13),
+             label="median", col="blue")
+
+
+
+
+#confronto tra distribuzioni di volume e median_price normalizzate. 
+#Si nota che volume è più asimmetrica e ha sicuramente un indice di curtosi superiore di median_price
+
+#non sono riuscito a creare una legenda per far vedere quale curva è volume e quale median_price...
+ggplot()+
+  geom_density(aes(x=(volume-mean(volume))/sd(volume)),col="blue")+
+  geom_density(aes(x=(median_price-mean(median_price))/sd(median_price)),col="red")+
+  labs(title="Confronto densità di probabilità normalizzata",
+       x="Valori normalizzati",
+       y="Frequenza relativa")
+  
+
+#------------------------------------------------------------------------------------------------------------
+
+#########PUNTO 5:	Dividi una delle variabili quantitative in classi, scegli tu quale e come, 
+#costruisci la distribuzione di frequenze, il grafico a barre corrispondente e infine calcola l’indice di Gini. 
+
+
+#distribuzione di frequenza della variabile sales divisa in classi
+dati$sales_cl=cut(sales,breaks=seq(75,425,70))
+attach(dati)
+ni=table(sales_cl)
+fi=ni/n
+Ni=cumsum(ni)
+Fi=Ni/n
+cbind(ni,fi,Ni,Fi)
+
+barplot(ni,
+        main="Distribuzione di frequenza assolute delle vendite",
+        xlab="N° di vendite in classi da 70",
+        ylab="Frequenza assoluta",
+        col="pink",
+        border="red")
+barplot(fi,
+        main="Distribuzione di frequenza relative delle vendite",
+        xlab="N° di vendite in classi da 70",
+        ylab="Frequenza relativa",
+        col="lightblue",
+        border="blue")
+
+gini.index(sales_cl)
+
+#------------------------------------------------------------------------------------------------------------
+
+#########PUNTO 6: Indice di Gini della variabile city
+
+#dimostrazione di quanto previsto
+
+gini.index(city)
+
+#------------------------------------------------------------------------------------------------------------
+
+#########PUNTO 7:	Qual è la probabilità che presa una riga a caso di questo dataset essa riporti la città “Beaumont”? 
+#E la probabilità che riporti il mese di Luglio? E la probabilità che riporti il mese di dicembre 2012?
+
+#probabilità che esca Beaumont
+table(city)["Beaumont"]/n
+#probabilità che esca luglio
+table(month)["7"]/n
+#probabilità che esca dicembre 2012
+table(month)["12"]/n*table(year)["2012"]/n
+
+#------------------------------------------------------------------------------------------------------------
+
+#########PUNTO 8: Esiste una colonna col prezzo mediano, 
+#creane una che indica invece il prezzo medio, utilizzando le altre variabili che hai a disposizione.
+
+#abbiamo il volume di vendite in mln$ e il numero totale di vendite
+dati$mean_price=volume*10^6/sales
+
+#------------------------------------------------------------------------------------------------------------
+
+#########PUNTO 9:	Prova a creare un’altra colonna che dia un’idea di “efficacia” degli annunci di vendita. 
+#Riesci a fare qualche considerazione?
+
+
+dati$effectiveness=(sales/listings)*100/months_inventory
+
+#------------------------------------------------------------------------------------------------------------
+
+#######PUNTO 10: #Prova a creare dei summary(), o semplicemente media e deviazione standard, 
+#di alcune variabili a tua scelta, condizionatamente alla città, agli anni e ai mesi. 
+
+
+install.packages("dplyr")
+library(dplyr)
+
+#valuto media, dev.std, mediana e coeff.variabilità in funzione della città
+dati %>%
+  group_by(city)%>%
+  summarise(media=mean(sales),
+            sd=sd(sales),
+            mediana=median(sales),
+            coeff.var=cv(sales),
+  )
+
+
+#valuto media, dev.std, mediana e coeff.variabilità in funzione dell'anno
+dati %>%
+  group_by(year)%>%
+  summarise(media=mean(sales),
+            sd=sd(sales),
+            mediana=median(sales),
+            coeff.var=cv(sales),
+  )
+
+#valuto media, dev.std, mediana e coeff.variabilità in funzione del trimestre
+dati %>%
+  group_by(quarter)%>%
+  summarise(media=mean(sales),
+            sd=sd(sales),
+            mediana=median(sales),
+            coeff.var=cv(sales),
+  )
+
+#valuto media, dev.std, mediana e coeff.variabilità in funzione della città per ogni anno
+dati %>%
+  group_by(city,year)%>%
+  summarise(media=mean(sales),
+            sd=sd(sales),
+            mediana=median(sales),
+            coeff.var=cv(sales),
+  )
+
+#------------------------------------------------------------------------------------------------------------
+
+#DA QUI IN POI UTILIZZARE GGPLOT2
+
+########PUNTO 1: Utilizza i boxplot per confrontare la distribuzione del prezzo mediano delle case tra le varie città. 
+#Commenta il risultato
+
+#grafico boxplot in funzione della città
+ggplot(dati)+
+  geom_boxplot(aes(x=city,y=median_price))+
+  labs(title="Boxplot del prezzo mediano per città",
+       x="Città",
+       y="Prezzo mediano di vendita [$]")
+#grafico boxplot in funzione della città per ogni anno
+ggplot(dati)+
+  geom_boxplot(aes(x=city,y=median_price,fill=factor(year)))+
+  labs(title="Boxplot del prezzo mediano per città per ogni anno",
+       x="Città",
+       y="Prezzo mediano di vendita [$]",
+       fill="Anni")
+
+#suddivido grafico a metà tra boxplot e densità di probabilità per avere l'occhio 
+#sia sugli indici di variabilità che su quelli di forma
+install.packages("gghalves")
+library(gghalves)
+ggplot(dati)+
+  geom_half_boxplot(aes(x=city,y=median_price),side="l",fill="lightblue")+
+  geom_half_violin(aes(x=city,y=median_price),side="r",fill="pink")+
+  labs(title="Boxplot e densità di probabilità del prezzo mediano per città",
+       x="Città",
+       y="Prezzo mediano di vendita [$]")
+
+#riassumo in tabella coefficiente di variabilità, indice di asimmetria di Fisher e indice di curtosi
+
+dati %>%
+  group_by(city)%>%
+  summarise(media=mean(median_price),
+            mediana=median(median_price),
+            IQR=IQR(median_price),
+            coeff.var.=cv(median_price),
+            asimmetria=skewness(median_price),
+            curtosi=kurtosis(median_price)-3,
+  )
+
+#------------------------------------------------------------------------------------------------------------
+
+
+######PUNTO 2: Utilizza i boxplot o qualche variante per confrontare la distribuzione 
+#del valore totale delle vendite tra le varie città ma anche tra i vari anni. Qualche considerazione da fare?
+
+#grafico boxplot della variabile sales in funzione della città per ogni anno
+ggplot(dati)+
+  geom_boxplot(aes(x=city,y=sales,fill=factor(year)))+
+  labs(title="Boxplot del n° di vendite per città per ogni anno",
+       x="Città",
+       y="N° di vendite",
+       fill="Anni")
+
+#------------------------------------------------------------------------------------------------------------
+
+
+########PUNTO 3: Usa un grafico a barre sovrapposte per ogni anno,  per confrontare il totale 
+#delle vendite nei vari mesi, sempre considerando le città.  
+#Prova a commentare ciò che viene fuori. Già che ci sei prova anche il grafico a barre normalizzato. 
+#Consiglio: Stai attento alla differenza tra geom_bar() e geom_col(). ù
+#PRO LEVEL: cerca un modo intelligente per inserire ANCHE la variabile Year allo stesso blocco di codice, senza però creare accrocchi nel grafico.
+
+#grafico a barre di sales per ogni anno in funzione della città
+#se uso geom_bar va aggiunto stat="identity", se uso geom_col non è necessario.
+ggplot(dati)+ 
+  geom_bar(aes(x=city,y=sales, fill=year), stat="identity", position="stack")+
+  labs(title="Grafico a barre del n° totale di vendite per ogni anno in funzione della città",
+       x="Città",
+       y="N° di vendite",
+       fill="Anni")
+
+ggplot(dati)+ 
+  geom_col(aes(x=city,y=sales, fill=year), position="stack")+
+  labs(title="Grafico a barre del n° totale di vendite per ogni anno in funzione della città",
+       x="Città",
+       y="N° di vendite",
+       fill="Anni")
+
+#grafico a barre normalizzato di sales per ogni anno in funzione della città
+ggplot(dati)+ 
+  geom_bar(aes(x=city,y=sales, fill=year), stat="identity", position="fill")+
+  labs(title="Grafico a barre del n° totale di vendite per ogni anno in funzione della città",
+       x="Città",
+       y="N° di vendite",
+       fill="Anni")
+
+#------------------------------------------------------------------------------------------------------------
+
+
+#########PUNTO 4: Crea un line chart di una variabile a tua scelta per fare confronti commentati fra città e periodi storici. Ti avviso che probabilmente all’inizio ti verranno fuori linee storte e poco chiare, ma non demordere. Consigli: Prova inserendo una variabile per volta. Prova a usare variabili esterne al dataset, tipo vettori creati da te appositamente.
+#creo array sales_history contenente il numero di vendite complessivo per anno
+
+
+#genero array che riporta il n° di vendite per anno
+sales_history_year=c()
+sales_history_month=c()
+k=1
+for (i in min(year):max(year)){
+  for (j in min(month):max(month)){
+  sales_history_month[j]=sum(sales[year==i & month==j])
+  }
+  sales_history_year[k]=sum(sales_history_month)
+  k=k+1
+}
+
+#genero serie storica delle vendite complessive anno per anno
+ggplot()+
+  geom_line(aes(x=c(min(year):max(year)),y=sales_history_year),lwd=1)+
+  labs(x="Anni",
+       y="Numero di vendite",
+       title="Andamento vendite dal 2010 al 2014")
+
+
+
+#genero array che riporta il n° di vendite per mese
+sales_history_month=c()
+k=1
+for (i in min(year):max(year)){
+  for (j in min(month):max(month)){
+    sales_history_month[k]=sum(sales[year==i & month==j])
+    k=k+1
+  }
+}
+
+
+#genero serie storica delle vendite complessive mese per mese
+ggplot()+
+  geom_line(aes(x=c(1:60),y=sales_history_month),lwd=1)+
+  labs(x="Mesi",
+       y="Numero di vendite",
+       title="Andamento vendite dal 2010 al 2014")+
+  scale_x_continuous(breaks=seq(0,60,12))
+
+
+
+#estrapolo dati per ogni città e confronto le loro serie storiche 
+dati_Beaumont=filter(dati, city=="Beaumont") 
+dati_BCS=filter(dati, city=="Bryan-College Station")
+dati_Tyler=filter(dati, city=="Tyler") 
+dati_Wichita_Falls=filter(dati, city=="Wichita Falls")
+
+ggplot()+
+  geom_line(aes(x=c(1:60),y=dati_Beaumont$sales,col="Beaumont"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=dati_BCS$sales,col="Bryan-College Station"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=dati_Tyler$sales,col="Tyler"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=dati_Wichita_Falls$sales,col="Wichita Falls"),lwd=1)+
+  labs(x="Mesi",
+       y="Numero di vendite",
+       title="Andamento vendite dal 2010 al 2014 per città")+
+  scale_x_continuous(breaks=seq(0,60,12))+
+  theme(legend.position="bottom")
+  
+
+#cambio colori a mio piacimento
+ggplot()+
+  geom_line(aes(x=c(1:60),y=dati_Beaumont$sales,col="Beaumont"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=dati_BCS$sales,col="Bryan-College Station"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=dati_Tyler$sales,col="Tyler"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=dati_Wichita_Falls$sales,col="Wichita Falls"),lwd=1)+
+  labs(x="Mesi",
+       y="Numero di vendite",
+       title="Andamento vendite dal 2010 al 2014 per città")+
+  scale_color_manual(name="",
+                     breaks=c("Beaumont","Bryan-College Station","Tyler","Wichita Falls"),
+                     values=c("red","green2","lightblue","orange"),
+                     labels=c("Beaumont","Bryan-College Station","Tyler","Wichita Falls"))+
+  scale_x_continuous(breaks=seq(0,60,12))+
+  theme(legend.position="bottom")
+
+
+
+#posso estrarre le serie storiche divise per città anche con il ciclo for sotto riportato 
+#(risultato equivalente all'estrapolazione sopra)
+sales_history_month_Beaumont=c()
+sales_history_month_BCS=c()
+sales_history_month_Tyler=c()
+sales_history_month_Wichita_Falls=c()
+k=1
+for (i in min(year):max(year)){
+  for (j in min(month):max(month)){
+    sales_history_month_Beaumont[k]=sum(sales[city=="Beaumont" & year==i & month==j])
+    sales_history_month_BCS[k]=sum(sales[city=="Bryan-College Station" & year==i & month==j])
+    sales_history_month_Tyler[k]=sum(sales[city=="Tyler" & year==i & month==j])
+    sales_history_month_Wichita_Falls[k]=sum(sales[city=="Wichita Falls" & year==i & month==j])
+    k=k+1
+  }
+}
+
+
+ggplot()+
+  geom_line(aes(x=c(1:60),y=sales_history_month_Beaumont,col="Beaumont"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=sales_history_month_BCS,col="Bryan-College Station"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=sales_history_month_Tyler,col="Tyler"),lwd=1)+
+  geom_line(aes(x=c(1:60),y=sales_history_month_Wichita_Falls,col="Wichita Falls"),lwd=1)+
+  labs(x="Mesi",
+       y="Numero di vendite",
+       title="Andamento vendite dal 2010 al 2014 per città")+
+  scale_color_manual(name="",
+                     breaks=c("Beaumont","Bryan-College Station","Tyler","Wichita Falls"),
+                     values=c("red","green2","lightblue","orange"),
+                     labels=c("Beaumont","Bryan-College Station","Tyler","Wichita Falls"))+
+  scale_x_continuous(breaks=seq(0,60,12))+
+  theme(legend.position="bottom")
+
