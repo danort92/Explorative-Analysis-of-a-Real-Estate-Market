@@ -1,5 +1,5 @@
-# Profession.AI
-11 Projects on real cases developed during the Data Science Professional Path
+# Data Science Professional Path of Profession.AI
+11 Projects on real cases developed during a Data Science specialized 400 hours course
 
 
 ## 1-Descriptive Statistics for Data Scientists
@@ -17,9 +17,9 @@
   
   The projects consists in the developments of the following points:
   
-  *-Desciption of the different variable types of the dataset;
+  *-Desciption of the different variable types of the dataset;*
   *-Analysis of indices of position (mean, median, quantiles, etc.), variability (dispersion index, coefficient of dispersion, relative variance, standard deviation,         Gini index, etc.) and distribution form (Fisher asymmetry index, Kurtosis index);*
-  *-Definition of an "Effectiveness" variable to look at which city/which year has been the most effective in terms of sales
+  *-Definition of an "Effectiveness" variable to look at which city/which year has been the most effective in terms of sales;*
   *-Use of moments, dplyr, ggplot, gghalves packages to show significative diagrams, boxplots, line charts and plots.*
   
 ## 2-Inferential Statistics fornData Scientists
