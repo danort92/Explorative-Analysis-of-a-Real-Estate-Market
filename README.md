@@ -5,8 +5,8 @@
 ## 1-Descriptive Statistics for Data Scientists
 
   Statistical study of a Real Estate dataset related to sales in Texas. The dataset contains the following variables: 
+  
     - city: names of the cities involved in the analysis ;
-    
     - year: years involved in the analysis;
     - month: months involved in the analysis;
     - sales: total n° of sales;
@@ -18,7 +18,7 @@
   The projects consists in the developments of the following points:
   
   
-  *-Desciption of the different variable types within the dataset;*
+  * * Desciption of the different variable types within the dataset;*
   
   *-Analysis of indices of position (mean, median, quantiles, etc.), variability (dispersion index, coefficient of dispersion, relative variance, standard deviation,         Gini index, etc.) and distribution form (Fisher asymmetry index, Kurtosis index);*
   
