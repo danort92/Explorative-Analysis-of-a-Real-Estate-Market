@@ -18,13 +18,13 @@
   The projects consists in the developments of the following points:
   
   
-  * * Desciption of the different variable types within the dataset;*
+  _ * Desciption of the different variable types within the dataset;_
   
-  *-Analysis of indices of position (mean, median, quantiles, etc.), variability (dispersion index, coefficient of dispersion, relative variance, standard deviation,         Gini index, etc.) and distribution form (Fisher asymmetry index, Kurtosis index);*
+  _ * Analysis of indices of position (mean, median, quantiles, etc.), variability (dispersion index, coefficient of dispersion, relative variance, standard deviation,         Gini index, etc.) and distribution form (Fisher asymmetry index, Kurtosis index);_
   
-  *-Definition of an "Effectiveness" variable to look at which city/which year has been the most effective in terms of sales;*
+  _ * Definition of an "Effectiveness" variable to look at which city/which year has been the most effective in terms of sales;*
   
-  *-Use of moments, dplyr, ggplot, gghalves packages to show significative diagrams, boxplots, line charts and plots.*
+  *-Use of moments, dplyr, ggplot, gghalves packages to show significative diagrams, boxplots, line charts and plots._
   
 ## 2-Inferential Statistics fornData Scientists
 
