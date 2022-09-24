@@ -17,7 +17,7 @@
   The projects consists in the developments of the following points:
   
   
-  *-Desciption of the different variable types of the dataset;*
+  *-Desciption of the different variable types within the dataset;*
   
   *-Analysis of indices of position (mean, median, quantiles, etc.), variability (dispersion index, coefficient of dispersion, relative variance, standard deviation,         Gini index, etc.) and distribution form (Fisher asymmetry index, Kurtosis index);*
   
