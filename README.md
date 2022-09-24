@@ -27,6 +27,6 @@
   
 ## 2-Inferential Statistics fornData Scientists
 
-  Inferential study of a medical dataset regarding 2.500 newborns of 3 different hospitals, containing parameters related to mothers (age, smoker/non smoker, number of     previous pregnancies, etc.) and infants (sex, weight, length, skull diameter, etc.). The goal of the study is to provide a regression model for a newborn's weight       knowing mother's and other newborn's data. (e.g. does a mother who smokes have a higher probability to give birth to a underweight baby?)
+  Inferential study of a medical dataset regarding 2.500 newborns of 3 different hospitals, containing parameters related to mothers (age, smoker/non smoker, number of     previous pregnancies, etc.) and infants (sex, weight, length, skull diameter, etc.). The goal of the study is to provide a regression model for a newborn's weight       knowing mother's and other newborn's data. (e.g. does a mother who smokes have a higher probability to give birth to an underweight baby?)
   
   
