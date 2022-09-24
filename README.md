@@ -26,7 +26,7 @@
   
   * _Use of moments, dplyr, ggplot, gghalves packages to show significative diagrams, boxplots, line charts and plots._
   
-## 2-Inferential Statistics fornData Scientists
+## 2-Inferential Statistics for Data Scientists
 
   Inferential study of a medical dataset regarding 2.500 newborns of 3 different hospitals, containing parameters related to mothers (age, smoker/non smoker, number of     previous pregnancies, etc.) and infants (sex, weight, length, skull diameter, etc.). 
   
