@@ -6,6 +6,7 @@
 
   Statistical study of a Real Estate dataset related to sales in Texas. The dataset contains the following variables: 
     - city: names of the cities involved in the analysis ;
+    
     - year: years involved in the analysis;
     - month: months involved in the analysis;
     - sales: total n° of sales;
