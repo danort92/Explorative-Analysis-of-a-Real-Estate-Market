@@ -20,11 +20,11 @@
   
   * _Desciption of the different variable types within the dataset;_
   
-  _ * Analysis of indices of position (mean, median, quantiles, etc.), variability (dispersion index, coefficient of dispersion, relative variance, standard deviation,         Gini index, etc.) and distribution form (Fisher asymmetry index, Kurtosis index);_
+  * _Analysis of indices of position (mean, median, quantiles, etc.), variability (dispersion index, coefficient of dispersion, relative variance, standard deviation,         Gini index, etc.) and distribution form (Fisher asymmetry index, Kurtosis index);_
   
-  _ * Definition of an "Effectiveness" variable to look at which city/which year has been the most effective in terms of sales;*
+  * _Definition of an "Effectiveness" variable to look at which city/which year has been the most effective in terms of sales;_
   
-  *-Use of moments, dplyr, ggplot, gghalves packages to show significative diagrams, boxplots, line charts and plots._
+  * _Use of moments, dplyr, ggplot, gghalves packages to show significative diagrams, boxplots, line charts and plots._
   
 ## 2-Inferential Statistics fornData Scientists
 
@@ -35,10 +35,10 @@
   The projects consists in the developments of the following points:
   
   
-  *-Brief descriptive analysis of the dataset variables;*
+  * _Brief descriptive analysis of the dataset variables;_
   
-  *-Use of different types of tests (t, wicoxon, shapiro, chi squared, etc.) to test several hypothesis, such as: "are infants' weight and lenght significantly different from the population?", "are the amounts of cesarean births significantly different among hospitals?", "are there some variables significantly different between sex?" and so on;*
+  * _Use of different types of tests (t, wicoxon, shapiro, chi squared, etc.) to test several hypothesis, such as: "are infants' weight and lenght significantly different from the population?", "are the amounts of cesarean births significantly different among hospitals?", "are there some variables significantly different between sex?" and so on;_
   
-  *-Creation of multiple linear regression models, evaluating which is the most accurate and using it to make some prediction about a newborn's characteristics.*
+  * _Creation of multiple linear regression models, evaluating which is the most accurate and using it to make some prediction about a newborn's characteristics._
   
   
