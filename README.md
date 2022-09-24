@@ -36,7 +36,7 @@
   
   *-Brief descriptive analysis of the dataset variables;*
   
-  *-Use of different types of tests (t, wicoxon, shapiro, chi squared, etc.) to test several hypothesis, such as: 1) are dataset's infants weight and lenght significantly different from the population? 2) are the amounts of cesarean births significantly different among hospitals, 3) are there some variables significantly different between sex? and so on;*
+  *-Use of different types of tests (t, wicoxon, shapiro, chi squared, etc.) to test several hypothesis, such as: "are infants' weight and lenght significantly different from the population?", "are the amounts of cesarean births significantly different among hospitals?", "are there some variables significantly different between sex?" and so on;*
   
   *-Creation of multiple linear regression models, evaluating which is the most accurate and using it to make some prediction about a newborn's characteristics.*
   
