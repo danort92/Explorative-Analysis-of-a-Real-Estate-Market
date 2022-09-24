@@ -1,5 +1,5 @@
-# Data Science Professional Path of Profession.AI
-11 Projects on real cases developed during a Data Science specialized 400 hours course
+# Data Science Professional Path of ProfessionAI
+11 Projects on real cases developed during a Data Science specialized 400 hours course held by https://www.linkedin.com/company/professionai/ 
 
 
 ## 1-Descriptive Statistics for Data Scientists
