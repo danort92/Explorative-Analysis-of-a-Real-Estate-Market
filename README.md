@@ -2,7 +2,7 @@
 11 Projects on real cases developed during the Data Science Professional Path
 
 
-# 1-Descriptive Statistics for Data Scientists:
+## 1-Descriptive Statistics for Data Scientists:
 
   Statistical study of a Real Estate dataset, analysing the following points:
   
