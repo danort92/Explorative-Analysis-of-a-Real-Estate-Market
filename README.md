@@ -1,4 +1,4 @@
-## 1-Descriptive Statistics for Data Scientists
+## Descriptive Statistics for Data Scientists
 
   Statistical study of a Real Estate dataset related to housing sales in Texas. The dataset contains the following variables: 
   
