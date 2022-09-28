@@ -1,6 +1,6 @@
 ## 1-Descriptive Statistics for Data Scientists
 
-  Statistical study of a Real Estate dataset related to sales in Texas. The dataset contains the following variables: 
+  Statistical study of a Real Estate dataset related to housing sales in Texas. The dataset contains the following variables: 
   
     - city: names of the cities involved in the analysis ;
     - year: years involved in the analysis;
