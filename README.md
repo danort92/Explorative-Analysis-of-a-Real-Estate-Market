@@ -1,4 +1,5 @@
-## Descriptive Statistics for Data Scientists
+## Explorative Analysis of a Real Estate Market
+
 
   Statistical study of a Real Estate dataset related to housing sales in Texas. The dataset contains the following variables: 
   
